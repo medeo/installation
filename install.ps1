@@ -20,10 +20,10 @@ New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory"
 
 $LocalTempDir = "c:\medeoInstallation"
 
+#Driver
 $urlDriver = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"
 $Driver = "DriverWindows.zip"
 (New-Object System.Net.WebClient).DownloadFile($urlDriver, "$LocalTempDir\$Driver")
-
 Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
-
 pnputil /add-driver "c:\medeoInstallation\windrv\*inf" /install
+
