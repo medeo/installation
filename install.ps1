@@ -27,3 +27,23 @@ $Driver = "DriverWindows.zip"
 Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
 pnputil /add-driver "c:\medeoInstallation\windrv\*inf" /install
 
+#Kligo
+$urlKligo = "https://s3.eu-central-1.amazonaws.com/kligo/Kligo-5.2.0.dmg"
+$Kligo = "Kligo.dmg"
+(New-Object System.Net.WebClient).DownloadFile($urlKligo, "$LocalTempDir\$Kligo"); & "$LocalTempDir\$Kligo" /silent /install;
+
+#TeamViewer
+$urlTV = "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
+$TeamViewer = "Teamviewer.exe"
+(New-Object System.Net.WebClient).DownloadFile($urlTV, "$LocalTempDir/$TeamViewer"); & "$LocalTempDir\$TeamViewer" /silent /install; 
+
+#Anydesk
+$urlAnyDesk = "https://download.anydesk.com/AnyDesk.exe"
+$AnyDesk = "AnyDesk.exe"
+(New-Object System.Net.WebClient).DownloadFile($urlAnyDesk, "$LocalTempDir/$AnyDesk"); & "$LocalTempDir\$AnyDesk" /silent /install; 
+
+
+#Chrome
+$ChromeInstaller = "ChromeInstaller.exe"; 
+$urlChrome = "http://dl.google.com/chrome/install/chrome_installer.exe"
+(new-object System.Net.WebClient).DownloadFile($urlChrome, "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; 
