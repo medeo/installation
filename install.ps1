@@ -66,6 +66,7 @@ $application = Get-WmiObject -Class Win32_Product -Filter "Name = 'Forge of Empi
 $application.Uninstall()
 
 Get-WmiObject -Class Win32_Product -Filter "Name = 'CoffeeCup Free FTP'"
+Get-Package -Provider Programs -IncludeWindowsInstaller -Name “BackZilla”
 
 ExpressVPN
 
