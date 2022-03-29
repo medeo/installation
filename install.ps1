@@ -17,5 +17,11 @@ Write-Host "|                                     Medeo                         
 Write-Host "|____________________________________________________________________________|" -ForegroundColor Red 
 
 New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory"
-url = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"; $LocalTempDir = "c:\medeoInstallation"; $Driver = "DriverWindows.zip"; (New-Object System.Net.WebClient).DownloadFile($url, "$LocalTempDir\$Driver")
+
+$LocalTempDir = "c:\medeoInstallation";
+
+$urlDriver = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"
+$Driver = "DriverWindows.zip"
+(New-Object System.Net.WebClient).DownloadFile($urlDriver, "$LocalTempDir\$Driver")
+
 Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
