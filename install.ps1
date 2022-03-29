@@ -35,12 +35,12 @@ $Kligo = "Kligo.dmg"
 #TeamViewer
 $urlTV = "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
 $TeamViewer = "Teamviewer.exe"
-(New-Object System.Net.WebClient).DownloadFile($urlTV, "$LocalTempDir/$TeamViewer"); & "$LocalTempDir\$TeamViewer" /silent /install; 
+(New-Object System.Net.WebClient).DownloadFile($urlTV, "$LocalTempDir\$TeamViewer"); & "$LocalTempDir\$TeamViewer" /silent /install; 
 
 #Anydesk
 $urlAnyDesk = "https://download.anydesk.com/AnyDesk.exe"
 $AnyDesk = "AnyDesk.exe"
-(New-Object System.Net.WebClient).DownloadFile($urlAnyDesk, "$LocalTempDir/$AnyDesk"); & "$LocalTempDir\$AnyDesk" /silent /install; 
+(New-Object System.Net.WebClient).DownloadFile($urlAnyDesk, "$LocalTempDir\$AnyDesk"); & "$LocalTempDir\$AnyDesk" /silent /install; 
 
 
 #Chrome
