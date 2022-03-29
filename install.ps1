@@ -49,12 +49,17 @@ $urlChrome = "http://dl.google.com/chrome/install/chrome_installer.exe"
 (new-object System.Net.WebClient).DownloadFile($urlChrome, "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; 
 
 
+#ICOMEDEO
+$urlICOMEDEO = "https://raw.githubusercontent.com/medeo/installation/ac065c9f89d9f98945b6e9adc1d059e750ee1a1a/Medeo.ico"
+$ICOMEDEO = "Medeo.ico"
+(New-Object System.Net.WebClient).DownloadFile($urlICOMEDEO, "$LocalTempDir\$ICOMEDEO")
+
 ###Shortcut Medeo
 $WShell = New-Object -comObject WScript.Shell
 $Shortcut = $WShell.CreateShortcut("$Home\Desktop\Medeo.lnk")
 $Shortcut.TargetPath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 $Shortcut.Arguments = "-kiosk https://medeo.care"
-$shortcut.IconLocation = "\\fileserver\share directory\icon.ico"
+$shortcut.IconLocation = "$LocalTempDir\Medeo.ico"
 $Shortcut.Save()
 
 <#
