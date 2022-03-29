@@ -62,14 +62,19 @@ $Shortcut.Arguments = "-kiosk https://medeo.care"
 $shortcut.IconLocation = "$LocalTempDir\Medeo.ico"
 $Shortcut.Save()
 
-$application = Get-WmiObject -Class Win32_Product -Filter "Name = 'Forge of Empires'"
-$application.Uninstall()
+$applicationForge = Get-WmiObject -Class Win32_Product -Filter "Name = 'Forge of Empires'"
+$applicationForge.Uninstall()
+
+$applicationExpressVPN = Get-WmiObject -Class Win32_Product -Filter "Name = 'ExpressVPN'"
+$applicationExpressVPN.Uninstall()
 
 Get-WmiObject -Class Win32_Product -Filter "Name = 'CoffeeCup Free FTP'"
 Get-Package -Provider Programs -IncludeWindowsInstaller -Name “BackZilla”
 
-ExpressVPN
 
+
+ps onedrive | Stop-Process -Force
+start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
 
 <#
 
