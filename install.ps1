@@ -18,7 +18,7 @@ Write-Host "|___________________________________________________________________
 
 New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory"
 
-$LocalTempDir = "c:\medeoInstallation";
+$LocalTempDir = "c:\medeoInstallation"
 
 $urlDriver = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"
 $Driver = "DriverWindows.zip"
