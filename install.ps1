@@ -55,7 +55,7 @@ $URLMEDEO = "kiosk.csv"
 
 $WShell = New-Object -comObject WScript.Shell
 $Shortcut = $WShell.CreateShortcut("$Home\Desktop\Medeo.lnk")
-$Shortcut.TargetPath = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+$Shortcut.TargetPath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 $Shortcut.Arguments = "-kiosk https://medeo.care"
 $Shortcut.Save()
 
