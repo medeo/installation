@@ -25,3 +25,6 @@ $Driver = "DriverWindows.zip"
 (New-Object System.Net.WebClient).DownloadFile($urlDriver, "$LocalTempDir\$Driver")
 
 Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
+
+Get-ChildItem "c:\medeoInstallation\" -Recurse -Filter "*.inf" | 
+ForEach-Object { PNPUtil.exe /add-driver $_.FullName /install 
