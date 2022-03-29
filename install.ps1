@@ -62,22 +62,29 @@ $Shortcut.Arguments = "-kiosk https://medeo.care"
 $shortcut.IconLocation = "$LocalTempDir\Medeo.ico"
 $Shortcut.Save()
 
+#Desinstaller OneDrive
+ps onedrive | Stop-Process -Force
+start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
+
+#Pour les PC Acer 03/22
+#la liste :
+# Get-WmiObject -Class Win32_Product | Select-Object -Property Name
 $applicationForge = Get-WmiObject -Class Win32_Product -Filter "Name = 'Forge of Empires'"
 $applicationForge.Uninstall()
 
 $applicationExpressVPN = Get-WmiObject -Class Win32_Product -Filter "Name = 'ExpressVPN'"
 $applicationExpressVPN.Uninstall()
 
+
 Get-WmiObject -Class Win32_Product -Filter "Name = 'CoffeeCup Free FTP'"
-Get-Package -Provider Programs -IncludeWindowsInstaller -Name “BackZilla”
+# Connaitre la liste : 
+#Get-Package -Provider Programs -IncludeWindowsInstaller -Name “*”
 
 
 
-ps onedrive | Stop-Process -Force
-start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
+
 
 <#
-
 #URLMedeo
 $urlURLMEDEO = "https://raw.githubusercontent.com/medeo/installation/main/kiosk.csv"
 $URLMEDEO = "kiosk.csv"
