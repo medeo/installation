@@ -62,6 +62,14 @@ $Shortcut.Arguments = "-kiosk https://medeo.care"
 $shortcut.IconLocation = "$LocalTempDir\Medeo.ico"
 $Shortcut.Save()
 
+$application = Get-WmiObject -Class Win32_Product -Filter "Name = 'Forge of Empires'"
+$application.Uninstall()
+
+Get-WmiObject -Class Win32_Product -Filter "Name = 'CoffeeCup Free FTP'"
+
+ExpressVPN
+
+
 <#
 
 #URLMedeo
