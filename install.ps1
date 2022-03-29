@@ -48,16 +48,21 @@ $ChromeInstaller = "ChromeInstaller.exe";
 $urlChrome = "http://dl.google.com/chrome/install/chrome_installer.exe"
 (new-object System.Net.WebClient).DownloadFile($urlChrome, "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; 
 
-#URLMedeo
-$urlURLMEDEO = "https://raw.githubusercontent.com/medeo/installation/main/kiosk.csv"
-$URLMEDEO = "kiosk.csv"
-(New-Object System.Net.WebClient).DownloadFile($urlURLMEDEO, "$LocalTempDir\$URLMEDEO")
 
+###Shortcut Medeo
 $WShell = New-Object -comObject WScript.Shell
 $Shortcut = $WShell.CreateShortcut("$Home\Desktop\Medeo.lnk")
 $Shortcut.TargetPath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 $Shortcut.Arguments = "-kiosk https://medeo.care"
+$shortcut.IconLocation = "\\fileserver\share directory\icon.ico"
 $Shortcut.Save()
+
+<#
+
+#URLMedeo
+$urlURLMEDEO = "https://raw.githubusercontent.com/medeo/installation/main/kiosk.csv"
+$URLMEDEO = "kiosk.csv"
+(New-Object System.Net.WebClient).DownloadFile($urlURLMEDEO, "$LocalTempDir\$URLMEDEO")
 
 $destination = 'F:\destination'
 $chromeroot = 'C:\Program Files (x86)\Google\Chrome'
@@ -82,4 +87,4 @@ ForEach ($item in $input){
     $URL = $($item.url)
     Create-Shortcut
     }
-
+#>
