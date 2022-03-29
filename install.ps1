@@ -26,5 +26,4 @@ $Driver = "DriverWindows.zip"
 
 Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
 
-Get-ChildItem "c:\medeoInstallation\windrv" -Recurse -Filter "*.inf" | 
-ForEach-Object { PNPUtil.exe /add-driver $_.FullName /install 
+Get-ChildItem "c:\medeoInstallation\windrv" -Recurse -Filter "*inf" | ForEach-Object { PNPUtil.exe /add-driver $_.FullName /install } 
