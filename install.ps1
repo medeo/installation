@@ -62,7 +62,7 @@ $ICOMEDEO = "Medeo.ico"
 $WShell = New-Object -comObject WScript.Shell
 $Shortcut = $WShell.CreateShortcut("$Home\Desktop\Medeo.lnk")
 $Shortcut.TargetPath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-$Shortcut.Arguments = "-kiosk https://medeo.care"
+$Shortcut.Arguments = "https://medeo.care"
 $shortcut.IconLocation = "$LocalTempDir\Medeo.ico"
 $Shortcut.Save()
 
@@ -168,34 +168,3 @@ $UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
 $UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
 Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }
-
-<#
-#URLMedeo
-$urlURLMEDEO = "https://raw.githubusercontent.com/medeo/installation/main/kiosk.csv"
-$URLMEDEO = "kiosk.csv"
-(New-Object System.Net.WebClient).DownloadFile($urlURLMEDEO, "$LocalTempDir\$URLMEDEO")
-
-$destination = 'F:\destination'
-$chromeroot = 'C:\Program Files (x86)\Google\Chrome'
-$workingdir = 'C:\script'
-$input = Import-Csv .\kiosk.csv
- 
-function Create-Shortcut
-{
-$Shell = New-Object -ComObject ("WScript.Shell")
-$ShortCut = $Shell.CreateShortcut("$destination\$URLTitle.lnk")
-$ShortCut.TargetPath="$chromeroot\Application\chrome.exe"
-$ShortCut.Arguments="--kiosk $URL"
-$ShortCut.WorkingDirectory = "$chromeroot\Application";
-$ShortCut.WindowStyle = 1;
-$ShortCut.IconLocation = "$chromeroot\Application\chrome.exe, 0";
-$ShortCut.Description = "";
-$ShortCut.Save()
-}
- 
-ForEach ($item in $input){
-    $URLTitle = $($item.name)
-    $URL = $($item.url)
-    Create-Shortcut
-    }
-#>
