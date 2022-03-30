@@ -42,6 +42,10 @@ $urlAnyDesk = "https://download.anydesk.com/AnyDesk.exe"
 $AnyDesk = "AnyDesk.exe"
 (New-Object System.Net.WebClient).DownloadFile($urlAnyDesk, "$LocalTempDir\$AnyDesk"); & "$LocalTempDir\$AnyDesk" /silent /install; 
 
+#Suppression 
+$urlsuppressionOffice = "https://outlookdiagnostics.azureedge.net/sarasetup/SetupProd_OffScrub.exe"
+$suppressionOffice = "AnyDesk.exe"
+(New-Object System.Net.WebClient).DownloadFile($urlsuppressionOffice, "$LocalTempDir\$suppressionOffice"); & "$LocalTempDir\$suppressionOffice" /install; 
 
 ###Chrome
 $ChromeInstaller = "ChromeInstaller.exe"; 
@@ -67,18 +71,88 @@ ps onedrive | Stop-Process -Force
 start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
 
 #Pour les PC Acer 03/22
-#la liste :
-# Get-WmiObject -Class Win32_Product | Select-Object -Property Name
-$applicationForge = Get-WmiObject -Class Win32_Product -Filter "Name = 'Forge of Empires'"
-$applicationForge.Uninstall()
+<#la liste :
 
-$applicationExpressVPN = Get-WmiObject -Class Win32_Product -Filter "Name = 'ExpressVPN'"
-$applicationExpressVPN.Uninstall()
+Get-WmiObject -Class Win32_Product | Select-Object -Property Name
+ ou
+$INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
+$INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
+$INSTALLED | ?{ $_.DisplayName -ne $null } | sort-object -Property DisplayName -Unique | Format-Table -AutoSize
+
+#>
+
+#Uninstall Firefox
+$SEARCH = 'firefox'
+$INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
+$INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
+$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+if ($RESULT.uninstallstring -like "msiexec*") {
+$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
+Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+} else {
+$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
+$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
+Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+}
+
+#Uninstall Office 16 Extensibility Component
+$SEARCH = 'Office 16 Click-to-Run Extensibility Component'
+$INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
+$INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
+$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+if ($RESULT.uninstallstring -like "msiexec*") {
+$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
+Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+} else {
+$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
+$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
+Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+}
+
+#Uninstall Office 16 Click-to-Run Localization Component
+$SEARCH = 'Office 16 Click-to-Run Localization Component'
+$INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
+$INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
+$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+if ($RESULT.uninstallstring -like "msiexec*") {
+$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
+Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+} else {
+$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
+$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
+Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+}
 
 
-Get-WmiObject -Class Win32_Product -Filter "Name = 'CoffeeCup Free FTP'"
-# Connaitre la liste : 
-#Get-Package -Provider Programs -IncludeWindowsInstaller -Name “*”
+#Uninstall Forge of Empires
+$SEARCH = 'Forge of Empires'
+$INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
+$INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
+$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+if ($RESULT.uninstallstring -like "msiexec*") {
+$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
+Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+} else {
+$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
+$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
+Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+}
+
+
+
+#Uninstall ExpressVPN
+$SEARCH = 'ExpressVPN'
+$INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
+$INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
+$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+if ($RESULT.uninstallstring -like "msiexec*") {
+$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
+Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+} else {
+$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
+$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
+Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+}
 
 
 
