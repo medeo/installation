@@ -52,16 +52,6 @@ $ChromeInstaller = "ChromeInstaller.exe";
 $urlChrome = "http://dl.google.com/chrome/install/chrome_installer.exe"
 (new-object System.Net.WebClient).DownloadFile($urlChrome, "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; 
 
-#Wallpaper
-$LocalTempDir = "c:\medeoInstallation"
-$urlWallpaper = "https://raw.githubusercontent.com/medeo/installation/main/wallpaper.png"
-$Wallpaper = "wallpaper.png"
-(New-Object System.Net.WebClient).DownloadFile($urlWallpaper, "$LocalTempDir\$Wallpaper")
-New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\" -Name "System"
-New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "Wallpaper" -Value "c:\medeoInstallation\wallpaper.png"  -PropertyType "String"
-New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "WallpaperStyle" -Value "4"  -PropertyType "String"
-stop-process -name explorer –force
-
 #ICOMEDEO
 $urlICOMEDEO = "https://raw.githubusercontent.com/medeo/installation/ac065c9f89d9f98945b6e9adc1d059e750ee1a1a/Medeo.ico"
 $ICOMEDEO = "Medeo.ico"
