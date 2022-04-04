@@ -1,0 +1,54 @@
+{
+   "checksum": "536178d2d086f3f7a1ac0d0fad9f441a",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13293274491171718",
+            "guid": "4d2ee800-a40b-4795-afd0-a699f14844ec",
+            "id": "5",
+            "name": "Medeo",
+            "type": "url",
+            "url": "https://medeo.care/"
+         }, {
+            "date_added": "13293274542771648",
+            "guid": "f6437064-d83a-4f76-95a0-a6d746ea3ab0",
+            "id": "6",
+            "name": "Espace formation",
+            "type": "url",
+            "url": "https://www.medeo-health.com/academy"
+         }, {
+            "date_added": "13293274558066474",
+            "guid": "6f033d30-e54f-4cc0-b8dc-1848bc07ae73",
+            "id": "7",
+            "name": "Assistance Medeo",
+            "type": "url",
+            "url": "https://help.medeo.care/fr/"
+         } ],
+         "date_added": "13293274484055443",
+         "date_modified": "13293274558066474",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Barre de favoris",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13293274484055447",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Autres favoris",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13293274484055448",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Favoris sur mobile",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
