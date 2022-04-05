@@ -17,4 +17,4 @@ $Wallpaper = "wallpaper.png"
 New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\" -Name "System"
 New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "Wallpaper" -Value "c:\medeoInstallation\wallpaper.png"  -PropertyType "String"
 New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "WallpaperStyle" -Value "4"  -PropertyType "String"
-stop-process -name explorer –force
+stop-process -name explorer -force
