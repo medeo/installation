@@ -17,7 +17,7 @@ Write-Host "|                                   Created by                      
 Write-Host "|                                     Medeo                                  |" -ForegroundColor Red 
 Write-Host "|____________________________________________________________________________|" -ForegroundColor Red 
 
-
+<#
 #Set variables as input for the script
 $KeyPath = "HKLM:\Software\Policies\Google\Chrome\ExtensionInstallForcelist"
 $KeyName = "1"
@@ -45,3 +45,28 @@ if(!((Get-ItemProperty $KeyPath).$KeyName)) {
         Write-Output "FAILED to create the registry key"
     }
 }
+#>
+
+ $regLocation = 'Software\Policies\Google\Chrome\ExtensionInstallForcelist'
+        # Each extension if you want to force install more than 1 extension needs its own key #
+
+        If (!(Test-Path "HKLM:\$regLocation")) {
+            Write-Verbose -Message "No Registry Path, setting count to: 0"
+            [int]$Count = 0
+            Write-Verbose -Message "Count is now $Count" 
+            New-Item -Path "HKLM:\$regLocation" -Force
+        
+        }
+        
+        Else {
+            Write-Verbose -Message "Keys found, counting them..."
+            [int]$Count = (Get-Item "HKLM:\$regLocation").Count
+            Write-Verbose -Message "Count is now $Count"
+        }
+
+        
+        $regKey = $Count + 1
+        Write-Verbose -Message "Creating reg key with value $regKey"
+        
+        $regData = "ilbdbafpgbnlnmlpojeaiedhocikipjm;https://clients2.google.com/service/update2/crx"
+        New-ItemProperty -Path "HKLM:\$regLocation" -Name $regKey -Value $regData -PropertyType STRING -Force
