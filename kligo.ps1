@@ -28,6 +28,6 @@ Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
 pnputil /add-driver "c:\medeoInstallation\windrv\*inf" /install
 
 #Kligo
-$urlKligo = "https://s3.eu-central-1.amazonaws.com/kligo/Kligo%20Setup%205.2.0.exe"
+$urlKligo = "https://kligo-rollouts112226-dev.s3.eu-west-1.amazonaws.com/staged/Kligo+Setup+6.0.0-develop.15.exe"
 $Kligo = "Kligo.exe"
 (New-Object System.Net.WebClient).DownloadFile($urlKligo, "$LocalTempDir\$Kligo"); & "$LocalTempDir\$Kligo" /silent /install;
