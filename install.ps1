@@ -53,7 +53,7 @@ $urlChrome = "http://dl.google.com/chrome/install/chrome_installer.exe"
 (new-object System.Net.WebClient).DownloadFile($urlChrome, "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; 
 
 #ICOMEDEO
-$urlICOMEDEO = "https://raw.githubusercontent.com/medeo/installation/ac065c9f89d9f98945b6e9adc1d059e750ee1a1a/Medeo.ico"
+$urlICOMEDEO = "https://raw.githubusercontent.com/medeo/installation/documents/ac065c9f89d9f98945b6e9adc1d059e750ee1a1a/Medeo.ico"
 $ICOMEDEO = "Medeo.ico"
 (New-Object System.Net.WebClient).DownloadFile($urlICOMEDEO, "$LocalTempDir\$ICOMEDEO")
 
@@ -84,42 +84,45 @@ $INSTALLED | ?{ $_.DisplayName -ne $null } | sort-object -Property DisplayName -
 $SEARCH = 'firefox'
 $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
 $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
-$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+$RESULT = $INSTALLED | ? { $_.DisplayName -ne $null } | Where-Object { $_.DisplayName -match $SEARCH } 
 if ($RESULT.uninstallstring -like "msiexec*") {
-$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
-Start-Process msiexec.exe -ArgumentList $ARGS -Wait
-} else {
-$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
-$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
-Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+    $ARGS = (($RESULT.UninstallString -split ' ')[1] -replace '/I', '/X ') + ' /q'
+    Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+}
+else {
+    $UNINSTALL_COMMAND = (($RESULT.UninstallString -split '\"')[1])
+    $UNINSTALL_ARGS = (($RESULT.UninstallString -split '\"')[2]) + ' /S'
+    Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }
 
 #Uninstall Office 16 Extensibility Component
 $SEARCH = 'Office 16 Click-to-Run Extensibility Component'
 $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
 $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
-$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+$RESULT = $INSTALLED | ? { $_.DisplayName -ne $null } | Where-Object { $_.DisplayName -match $SEARCH } 
 if ($RESULT.uninstallstring -like "msiexec*") {
-$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
-Start-Process msiexec.exe -ArgumentList $ARGS -Wait
-} else {
-$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
-$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
-Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+    $ARGS = (($RESULT.UninstallString -split ' ')[1] -replace '/I', '/X ') + ' /q'
+    Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+}
+else {
+    $UNINSTALL_COMMAND = (($RESULT.UninstallString -split '\"')[1])
+    $UNINSTALL_ARGS = (($RESULT.UninstallString -split '\"')[2]) + ' /S'
+    Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }
 
 #Uninstall Office 16 Click-to-Run Localization Component
 $SEARCH = 'Office 16 Click-to-Run Localization Component'
 $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
 $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
-$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+$RESULT = $INSTALLED | ? { $_.DisplayName -ne $null } | Where-Object { $_.DisplayName -match $SEARCH } 
 if ($RESULT.uninstallstring -like "msiexec*") {
-$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
-Start-Process msiexec.exe -ArgumentList $ARGS -Wait
-} else {
-$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
-$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
-Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+    $ARGS = (($RESULT.UninstallString -split ' ')[1] -replace '/I', '/X ') + ' /q'
+    Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+}
+else {
+    $UNINSTALL_COMMAND = (($RESULT.UninstallString -split '\"')[1])
+    $UNINSTALL_ARGS = (($RESULT.UninstallString -split '\"')[2]) + ' /S'
+    Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }
 
 
@@ -127,14 +130,15 @@ Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 $SEARCH = 'Forge of Empires'
 $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
 $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
-$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+$RESULT = $INSTALLED | ? { $_.DisplayName -ne $null } | Where-Object { $_.DisplayName -match $SEARCH } 
 if ($RESULT.uninstallstring -like "msiexec*") {
-$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
-Start-Process msiexec.exe -ArgumentList $ARGS -Wait
-} else {
-$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
-$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
-Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+    $ARGS = (($RESULT.UninstallString -split ' ')[1] -replace '/I', '/X ') + ' /q'
+    Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+}
+else {
+    $UNINSTALL_COMMAND = (($RESULT.UninstallString -split '\"')[1])
+    $UNINSTALL_ARGS = (($RESULT.UninstallString -split '\"')[2]) + ' /S'
+    Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }
 
 
@@ -143,14 +147,15 @@ Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 $SEARCH = 'ExpressVPN'
 $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
 $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
-$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH } 
+$RESULT = $INSTALLED | ? { $_.DisplayName -ne $null } | Where-Object { $_.DisplayName -match $SEARCH } 
 if ($RESULT.uninstallstring -like "msiexec*") {
-$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
-Start-Process msiexec.exe -ArgumentList $ARGS -Wait
-} else {
-$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
-$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
-Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+    $ARGS = (($RESULT.UninstallString -split ' ')[1] -replace '/I', '/X ') + ' /q'
+    Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+}
+else {
+    $UNINSTALL_COMMAND = (($RESULT.UninstallString -split '\"')[1])
+    $UNINSTALL_ARGS = (($RESULT.UninstallString -split '\"')[2]) + ' /S'
+    Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }
 
 
@@ -158,12 +163,13 @@ Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 $SEARCH = 'Norton Security Ultra'
 $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, UninstallString
 $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, UninstallString
-$RESULT = $INSTALLED | ?{ $_.DisplayName -ne $null } | Where-Object {$_.DisplayName -match $SEARCH }
+$RESULT = $INSTALLED | ? { $_.DisplayName -ne $null } | Where-Object { $_.DisplayName -match $SEARCH }
 if ($RESULT.uninstallstring -like "msiexec*") {
-$ARGS=(($RESULT.UninstallString -split ' ')[1] -replace '/I','/X ') + ' /q'
-Start-Process msiexec.exe -ArgumentList $ARGS -Wait
-} else {
-$UNINSTALL_COMMAND=(($RESULT.UninstallString -split '\"')[1])
-$UNINSTALL_ARGS=(($RESULT.UninstallString -split '\"')[2]) + ' /S'
-Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
+    $ARGS = (($RESULT.UninstallString -split ' ')[1] -replace '/I', '/X ') + ' /q'
+    Start-Process msiexec.exe -ArgumentList $ARGS -Wait
+}
+else {
+    $UNINSTALL_COMMAND = (($RESULT.UninstallString -split '\"')[1])
+    $UNINSTALL_ARGS = (($RESULT.UninstallString -split '\"')[2]) + ' /S'
+    Start-Process $UNINSTALL_COMMAND -ArgumentList $UNINSTALL_ARGS -Wait
 }

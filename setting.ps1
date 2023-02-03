@@ -5,13 +5,13 @@ powercfg -change -standby-timeout-dc 0
 
 #Favoris
 $LocalTempDir = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default"
-$urlFavoris = "https://raw.githubusercontent.com/medeo/installation/main/Bookmarks"
+$urlFavoris = "https://raw.githubusercontent.com/medeo/installation/documents/main/Bookmarks"
 $Favoris = "Bookmarks"
 (New-Object System.Net.WebClient).DownloadFile($urlFavoris, "$LocalTempDir\$Favoris")
 
 #Wallpaper
 $LocalTempDir = "c:\medeoInstallation"
-$urlWallpaper = "https://raw.githubusercontent.com/medeo/installation/main/wallpaper.png"
+$urlWallpaper = "https://raw.githubusercontent.com/medeo/installation/documents/main/wallpaper.png"
 $Wallpaper = "wallpaper.png"
 (New-Object System.Net.WebClient).DownloadFile($urlWallpaper, "$LocalTempDir\$Wallpaper")
 New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\" -Name "System"
