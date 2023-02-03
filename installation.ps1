@@ -1,4 +1,4 @@
-sing namespace System.Management.Automation.Host
+using namespace System.Management.Automation.Host
 $continue = $true
 while ($continue) {
     Write-Host "`n"
