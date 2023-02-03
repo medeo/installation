@@ -1,0 +1,1 @@
+reg delete HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v fr.comunica.vitalzen /f /reg:64
