@@ -18,17 +18,17 @@ while ($continue) {
     Write-Host "|                                   Created by                               |" -ForegroundColor Red 
     Write-Host "|                                     Medeo                                  |" -ForegroundColor Red 
     Write-Host "|____________________________________________________________________________|" -ForegroundColor Red 
-    write-host “ ”
-    write-host “ ”
-    write-host “ ”
-    write-host “ ”
-    write-host “ ”
+    write-host " "
+    write-host " "
+    write-host " "
+    write-host " "
+    write-host " "
     write-host "--------------------------------------------------------"
-    write-host “1. Installer Kligo”
+    write-host "1. Installer Kligo"
     write-host "2. Installer Kligo pour Weda"
     write-host "q. exit"
     write-host "--------------------------------------------------------"
-    $choix = read-host “faire un choix ”
+    $choix = read-host "faire un choix "
 
 
     New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory"
