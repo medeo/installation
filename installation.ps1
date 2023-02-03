@@ -1,3 +1,4 @@
+sing namespace System.Management.Automation.Host
 $continue = $true
 while ($continue) {
     Write-Host "`n"
@@ -81,6 +82,6 @@ while ($continue) {
             until ($selection -eq 'q')
         }
         ‘q’ { $continue = $false }
-        default { Write-Host "Choix invalide" -ForegroundColor Red }
+        default { Write-Host "Choix invalide"-ForegroundColor Red }
     }
 }
