@@ -31,3 +31,14 @@ pnputil /add-driver "c:\medeoInstallation\windrv\*inf" /install
 $urlKligo = "https://kligo-rollouts112226-dev.s3.eu-west-1.amazonaws.com/staged/Kligo+Setup+6.0.0-develop.15.exe"
 $Kligo = "Kligo.exe"
 (New-Object System.Net.WebClient).DownloadFile($urlKligo, "$LocalTempDir\$Kligo"); & "$LocalTempDir\$Kligo" /silent /install;
+
+#VITALZEN
+$urlVZL = "https://raw.githubusercontent.com/medeo/installation/main/documents/LAUNCHER_VITALZEN.xml"
+$urlVZR = "https://raw.githubusercontent.com/medeo/installation/main/documents/REMOVER_VITALZEN.xml"
+$urlVZB = "https://raw.githubusercontent.com/medeo/installation/main/documents/vitalzenremover.bat"
+$VZL = "LAUNCHER_VITALZEN.xml"
+$VZR = "REMOVER_VITALZEN.xml"
+$VZB = "vitalzenremover.bat"
+(New-Object System.Net.WebClient).DownloadFile($urlVZL, "$LocalTempDir\$VZL")
+(New-Object System.Net.WebClient).DownloadFile($urlVZR, "$LocalTempDir\$VZR")
+(New-Object System.Net.WebClient).DownloadFile($urlVZB, "$LocalTempDir\$VZB")

@@ -53,7 +53,7 @@ $urlChrome = "http://dl.google.com/chrome/install/chrome_installer.exe"
 (new-object System.Net.WebClient).DownloadFile($urlChrome, "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; 
 
 #ICOMEDEO
-$urlICOMEDEO = "https://raw.githubusercontent.com/medeo/installation/documents/ac065c9f89d9f98945b6e9adc1d059e750ee1a1a/Medeo.ico"
+$urlICOMEDEO = "https://raw.githubusercontent.com/medeo/installation/main/documents/ac065c9f89d9f98945b6e9adc1d059e750ee1a1a/Medeo.ico"
 $ICOMEDEO = "Medeo.ico"
 (New-Object System.Net.WebClient).DownloadFile($urlICOMEDEO, "$LocalTempDir\$ICOMEDEO")
 
