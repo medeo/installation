@@ -31,7 +31,7 @@ while ($continue) {
     $choix = read-host "faire un choix "
 
 
-    New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory"
+    New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory" | Out-Null
     $LocalTempDir = "c:\medeoInstallation"
 
 
