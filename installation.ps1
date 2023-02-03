@@ -50,36 +50,6 @@ while ($continue) {
             (New-Object System.Net.WebClient).DownloadFile($urlKligo, "$LocalTempDir\$Kligo"); & "$LocalTempDir\$Kligo" /silent /install;
         }
         2 { 
-            do {
-                write-host “ ”
-                write-host “ ”
-                write-host "--------------------------------------------------------"
-                write-host “1. Intégration avec Vital Zen”
-                write-host "2. Installer l'extension Kligo"
-                write-host "q. exit"
-                write-host "--------------------------------------------------------"
-                $choix = Read-Host “faire un choix "
-                switch ($choix) {
-                    '1' {
-                        #VITALZEN
-                        $urlVZL = "https://raw.githubusercontent.com/medeo/installation/main/documents/LAUNCHER_VITALZEN.xml"
-                        $urlVZR = "https://raw.githubusercontent.com/medeo/installation/main/documents/REMOVER_VITALZEN.xml"
-                        $urlVZB = "https://raw.githubusercontent.com/medeo/installation/main/documents/vitalzenremover.bat"
-                        $VZL = "LAUNCHER_VITALZEN.xml"
-                        $VZR = "REMOVER_VITALZEN.xml"
-                        $VZB = "vitalzenremover.bat"
-                            (New-Object System.Net.WebClient).DownloadFile($urlVZL, "$LocalTempDir\$VZL")
-                            (New-Object System.Net.WebClient).DownloadFile($urlVZR, "$LocalTempDir\$VZR")
-                            (New-Object System.Net.WebClient).DownloadFile($urlVZB, "$LocalTempDir\$VZB")
-                    } '2' {
-
-                    } '3' {
-                        'You chose option #3'
-                    }
-                }
-                pause
-            }
-            until ($selection -eq 'q')
         }
         ‘q’ { $continue = $false }
         default { Write-Host "Choix invalide"-ForegroundColor Red }
