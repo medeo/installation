@@ -17,7 +17,6 @@ Write-Host "|                                     Medeo                         
 Write-Host "|____________________________________________________________________________|" -ForegroundColor Red 
 
 New-Item -Path "c:\" -Name "medeoInstallation" -ItemType "directory"
-
 $LocalTempDir = "c:\medeoInstallation"
 
 #Driver
