@@ -2,6 +2,7 @@ clear
 using namespace System.Management.Automation.Host
 $continue = $true
 while ($continue) {
+    clear
     Write-Host "`n"
     Write-Host " ____________________________________________________________________________ " -ForegroundColor Red 
     Write-Host "|                                                                            |" -ForegroundColor Red 
