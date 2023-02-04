@@ -28,7 +28,7 @@ while ($continue) {
     write-host "2. Installer Kligo"
     write-host "3. Installer Kligo + Driver + Extension Chrome"
     write-host "4. Installer Extension Chrome"
-    write-host "5. Préparation avec VitalZen"
+    write-host "5. Installer task pour cohabitation avec VitalZen"
     write-host "q. exit"
     write-host "--------------------------------------------------------"
     $choix = read-host "faire un choix "
@@ -46,7 +46,7 @@ while ($continue) {
             $Driver = "DriverWindows.zip"
             (New-Object System.Net.WebClient).DownloadFile($urlDriver, "$LocalTempDir\$Driver")
             Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
-            pnputil /add-driver "c:\medeoInstallation\windrv\*inf" /install
+            pnputil /add-driver "$LocalTempDir\windrv\*inf" /install
 
             #Kligo
             $urlKligo = "https://kligo-rollouts112226-dev.s3.eu-west-1.amazonaws.com/staged/Kligo+Setup+6.0.0-develop.15.exe"
@@ -65,7 +65,7 @@ while ($continue) {
             $Driver = "DriverWindows.zip"
             (New-Object System.Net.WebClient).DownloadFile($urlDriver, "$LocalTempDir\$Driver")
             Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
-            pnputil /add-driver "c:\medeoInstallation\windrv\*inf" /install
+            pnputil /add-driver "$LocalTempDir\windrv\*inf" /install
 
             #Kligo
             $urlKligo = "https://kligo-rollouts112226-dev.s3.eu-west-1.amazonaws.com/staged/Kligo+Setup+6.0.0-develop.15.exe"
@@ -139,6 +139,10 @@ while ($continue) {
             Register-ScheduledTask -TaskName "LAUNCHER_VITALZEN" -Xml (Get-Content "$LocalTempDir\$VZL" | Out-String) -Force    
             Register-ScheduledTask -TaskName "REMOVER_VITALZEN" -Xml (Get-Content "$LocalTempDir\$VZR" | Out-String) -Force    
             taskmgr
+
+        }
+        6 {
+            #Désinstallation de l'extension Chrome
 
         }
         ‘q’ { $continue = $false }
