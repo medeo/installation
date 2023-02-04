@@ -31,8 +31,8 @@ while ($continue) {
     write-host "3. Installer Kligo + Driver + Extension Chrome"
     write-host "4. Installer Extension Chrome"
     write-host "5. Installer task pour cohabitation avec VitalZen"
-    write-host "6. Désinstaller Extension Chrome"
-    write-host "7. Préparation PC MEDEO"
+    write-host "6. Desinstaller Extension Chrome"
+    write-host "7. Preparation PC MEDEO"
     write-host "q. exit"
     write-host "--------------------------------------------------------"
     $choix = read-host "faire un choix "
@@ -89,13 +89,13 @@ while ($continue) {
             Install-Driver
 
             #Installation de Kligo
-            write-host "Téléchargement et installation de Kligo"
+            write-host "Telechargement et installation de Kligo"
             Install-Kligo
             clear
         }
         2 { 
             #Installation de Kligo
-            write-host "Téléchargement et installation de Kligo"
+            write-host "Telechargement et installation de Kligo"
             Install-Kligo
             clear   
         }
