@@ -139,8 +139,7 @@ while ($continue) {
                 $KeyPath = ""
             )
             Set-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome\ExtensionInstallForcelist" -Name Lastkey -Value $KeyPath -Type String -Force
-            Start-Process "regedit.exe" -args "-m"
-
+            Start-Process "regedit.exe" -args "-m"            
         }
         7 {
             #Préparation PC MEDEO
