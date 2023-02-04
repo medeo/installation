@@ -41,30 +41,6 @@ while ($continue) {
     }
     $LocalTempDir = "c:\medeoInstallation"
 
-    function Get-FileVB {
-        param(
-            [Parameter(Mandatory = $true)]
-            $urlKligo, 
-            $destinationFolder = "$LocalTempDir", 
-            [switch]$includeStats
-        )
-        Add-Type –AssemblyName Microsoft.VisualBasic
-        #resolve potential redirect
-        $response = [System.Net.WebRequest]::Create($url).GetResponse()
-        $urlKligo = $response.ResponseUri.OriginalString
-        $response.Close()
-        $destination = Join-Path $destinationFolder ($Kligo | Split-Path –Leaf)
-        $net = New-Object Microsoft.VisualBasic.Devices.Network
-        $start = Get-Date
-        #signature DownloadFile(url, destination, username, password, [bool]showUI, [int]connecdtionTimeOutInMS,[Microsoft.VisualBasic.FileIO.UICancelOption]OnUserCancel)
-        $net.DownloadFile($url, $destination, '', '', $true, 500, [Microsoft.VisualBasic.FileIO.UICancelOption]::DoNothing )
-        $elapsed = ((Get-Date) – $start).ToString('hh\:mm\:ss')
-        $totalSize = (Get-Item $destination).Length | Get-FileSize
-        if ($includeStats.IsPresent) {
-            [PSCustomObject]@{Name = $MyInvocation.MyCommand; TotalSize = $totalSize; Time = $elapsed }
-        }
-        Get-Item $destination | Unblock-File
-    }
     function Install-Kligo {
         $urlKligo = "https://s3.eu-central-1.amazonaws.com/kligo/Kligo%20Setup%205.2.0.exe"
         $Kligo = "Kligo.exe"
