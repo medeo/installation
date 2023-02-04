@@ -1,5 +1,5 @@
 clear
-$OutputEncoding = [ System.Text.Encoding]::UTF8   
+$OutputEncoding = [ System.Text.Encoding]::UTF8
 $continue = $true
 while ($continue) {
     clear
