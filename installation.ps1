@@ -33,14 +33,14 @@ while ($continue) {
     write-host "--------------------------------------------------------"
     $choix = read-host "faire un choix "
 
-
+    $path = "c:\medeoInstallation"
+    If (!(test-path -PathType container $path)) {
+        New-Item -ItemType Directory -Path $path
+    }
+    $LocalTempDir = "c:\medeoInstallation"
 
     switch ($choix) {
         1 {
-            $path = "c:\medeoInstallation"
-            If (!(test-path -PathType container $path)) {
-                New-Item -ItemType Directory -Path $path
-            }
             #Driver
             $urlDriver = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"
             $Driver = "DriverWindows.zip"
@@ -60,10 +60,6 @@ while ($continue) {
             (New-Object System.Net.WebClient).DownloadFile($urlKligo, "$LocalTempDir\$Kligo"); & "$LocalTempDir\$Kligo" /silent /install;   
         }
         3 {
-            $path = "c:\medeoInstallation"
-            If (!(test-path -PathType container $path)) {
-                New-Item -ItemType Directory -Path $path
-            }
             #Driver
             $urlDriver = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"
             $Driver = "DriverWindows.zip"
@@ -103,10 +99,6 @@ while ($continue) {
 
         }
         4 {
-            $path = "c:\medeoInstallation"
-            If (!(test-path -PathType container $path)) {
-                New-Item -ItemType Directory -Path $path
-            }
             #Install Kligo Chrome extension
             $regLocation = 'Software\Policies\Google\Chrome\ExtensionInstallForcelist'
             # Each extension if you want to force install more than 1 extension needs its own key #
@@ -133,10 +125,6 @@ while ($continue) {
             New-ItemProperty -Path "HKLM:\$regLocation" -Name $regKey -Value $regData -PropertyType STRING -Force
         }
         5 {
-            $path = "c:\medeoInstallation"
-            If (!(test-path -PathType container $path)) {
-                New-Item -ItemType Directory -Path $path
-            }
             #VITALZEN
             $urlVZL = "https://raw.githubusercontent.com/medeo/installation/main/documents/LAUNCHER_VITALZEN.xml"
             $urlVZR = "https://raw.githubusercontent.com/medeo/installation/main/documents/REMOVER_VITALZEN.xml"
@@ -149,7 +137,8 @@ while ($continue) {
                 (New-Object System.Net.WebClient).DownloadFile($urlVZB, "$LocalTempDir\$VZB")
             
             Register-ScheduledTask -TaskName "LAUNCHER_VITALZEN" -Xml (Get-Content "$LocalTempDir\$VZL" | Out-String) -Force    
-            #taskmgr
+            Register-ScheduledTask -TaskName "REMOVER_VITALZEN" -Xml (Get-Content "$LocalTempDir\$VZR" | Out-String) -Force    
+            taskmgr
 
         }
         ‘q’ { $continue = $false }
