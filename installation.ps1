@@ -41,6 +41,31 @@ while ($continue) {
     }
     $LocalTempDir = "c:\medeoInstallation"
 
+    function Get-FileVB {
+        param(
+            [Parameter(Mandatory = $true)]
+            $urlKligo, 
+            $destinationFolder = "$LocalTempDir", 
+            [switch]$includeStats
+
+        )
+        Add-Type –AssemblyName Microsoft.VisualBasic
+        #resolve potential redirect
+        $response = [System.Net.WebRequest]::Create($url).GetResponse()
+        $urlKligo = $response.ResponseUri.OriginalString
+        $response.Close()
+        $destination = Join-Path $destinationFolder ($Kligo | Split-Path –Leaf)
+        $net = New-Object Microsoft.VisualBasic.Devices.Network
+        $start = Get-Date
+        #signature DownloadFile(url, destination, username, password, [bool]showUI, [int]connecdtionTimeOutInMS,[Microsoft.VisualBasic.FileIO.UICancelOption]OnUserCancel)
+        $net.DownloadFile($url, $destination, '', '', $true, 500, [Microsoft.VisualBasic.FileIO.UICancelOption]::DoNothing )
+        $elapsed = ((Get-Date) – $start).ToString('hh\:mm\:ss')
+        $totalSize = (Get-Item $destination).Length | Get-FileSize
+        if ($includeStats.IsPresent) {
+            [PSCustomObject]@{Name = $MyInvocation.MyCommand; TotalSize = $totalSize; Time = $elapsed }
+        }
+        Get-Item $destination | Unblock-File
+    }
     function Install-Kligo {
         #Kligo
         $urlKligo = "https://kligo-rollouts112226-dev.s3.eu-west-1.amazonaws.com/staged/Kligo+Setup+6.0.0-develop.15.exe"
@@ -56,31 +81,7 @@ while ($continue) {
                 else { ($_ / 1pb), 'PB' }
             )
         }
-        function Get-FileVB {
-            param(
-                [Parameter(Mandatory = $true)]
-                $urlKligo, 
-                $destinationFolder = "$LocalTempDir", 
-                [switch]$includeStats
-    
-            )
-            Add-Type –AssemblyName Microsoft.VisualBasic
-            #resolve potential redirect
-            $response = [System.Net.WebRequest]::Create($url).GetResponse()
-            $urlKligo = $response.ResponseUri.OriginalString
-            $response.Close()
-            $destination = Join-Path $destinationFolder ($Kligo | Split-Path –Leaf)
-            $net = New-Object Microsoft.VisualBasic.Devices.Network
-            $start = Get-Date
-            #signature DownloadFile(url, destination, username, password, [bool]showUI, [int]connecdtionTimeOutInMS,[Microsoft.VisualBasic.FileIO.UICancelOption]OnUserCancel)
-            $net.DownloadFile($url, $destination, '', '', $true, 500, [Microsoft.VisualBasic.FileIO.UICancelOption]::DoNothing )
-            $elapsed = ((Get-Date) – $start).ToString('hh\:mm\:ss')
-            $totalSize = (Get-Item $destination).Length | Get-FileSize
-            if ($includeStats.IsPresent) {
-                [PSCustomObject]@{Name = $MyInvocation.MyCommand; TotalSize = $totalSize; Time = $elapsed }
-            }
-            Get-Item $destination | Unblock-File
-        }
+   
     
         Get-FileVB $urlKligo -includeStats
         Start-Process -Wait -FilePath "$LocalTempDir\$Kligo" -ArgumentList "/silent /install"
