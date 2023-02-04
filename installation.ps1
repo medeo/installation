@@ -55,7 +55,8 @@ while ($continue) {
                 elseif ($_ -lt 1pb) { ($_ / 1tb), 'TB' }
                 else { ($_ / 1pb), 'PB' }
             )
-        }function Get-FileVB {
+        }
+        function Get-FileVB {
             param(
                 [Parameter(Mandatory = $true)]
                 $urlKligo, 
