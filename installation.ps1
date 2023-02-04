@@ -1,3 +1,4 @@
+clear
 using namespace System.Management.Automation.Host
 $continue = $true
 while ($continue) {
