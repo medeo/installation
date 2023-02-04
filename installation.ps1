@@ -1,6 +1,5 @@
 clear
 $OutputEncoding = [ System.Text.Encoding]::UTF8   
-using namespace System.Management.Automation.Host
 $continue = $true
 while ($continue) {
     clear
