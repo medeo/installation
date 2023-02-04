@@ -66,24 +66,9 @@ while ($continue) {
         Get-Item $destination | Unblock-File
     }
     function Install-Kligo {
-        #Kligo
-        $urlKligo = "https://kligo-rollouts112226-dev.s3.eu-west-1.amazonaws.com/staged/Kligo+Setup+6.0.0-develop.15.exe"
+        $urlKligo = "https://s3.eu-central-1.amazonaws.com/kligo/Kligo%20Setup%205.2.0.exe"
         $Kligo = "Kligo.exe"
-
-        filter Get-FileSize {
-            "{0:N2} {1}" -f $(
-                if ($_ -lt 1kb) { $_, 'Bytes' }
-                elseif ($_ -lt 1mb) { ($_ / 1kb), 'KB' }
-                elseif ($_ -lt 1gb) { ($_ / 1mb), 'MB' }
-                elseif ($_ -lt 1tb) { ($_ / 1gb), 'GB' }
-                elseif ($_ -lt 1pb) { ($_ / 1tb), 'TB' }
-                else { ($_ / 1pb), 'PB' }
-            )
-        }
-   
-    
-        Get-FileVB $urlKligo -includeStats
-        Start-Process -Wait -FilePath "$LocalTempDir\$Kligo" -ArgumentList "/silent /install"
+        (New-Object System.Net.WebClient).DownloadFile($urlKligo, "$LocalTempDir\$Kligo"); & "$LocalTempDir\$Kligo" /silent /install;
 
     }
 
