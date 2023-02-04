@@ -86,21 +86,27 @@ while ($continue) {
     switch ($choix) {
         1 {
             #Installation du Driver
+            write-host "Installation du Driver"
             Install-Driver
 
             #Installation de Kligo
+            write-host "Téléchargement et installation de Kligo"
             Install-Kligo
+            clear
         }
         2 { 
             #Installation de Kligo
+            write-host "Téléchargement et installation de Kligo"
             Install-Kligo
             clear   
         }
         3 {
             #Installation du Driver
+            write-host "Installation du Driver"
             Install-Driver
 
             #Installation de Kligo
+            write-host "Téléchargement et installation de Kligo"
             Install-Kligo
 
             #Installation Chrome extension
