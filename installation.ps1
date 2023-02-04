@@ -105,14 +105,12 @@ while ($continue) {
             Write-Verbose -Message "Count is now $Count"
         }
 
-
         $regKey = $Count + 1
         Write-Verbose -Message "Creating reg key with value $regKey"
 
         $regData = "ilbdbafpgbnlnmlpojeaiedhocikipjm;https://clients2.google.com/service/update2/crx"
         New-ItemProperty -Path "HKLM:\$regLocation" -Name $regKey -Value $regData -PropertyType STRING -Force
     }
-
     function Install-Driver {
         $urlDriver = "https://kligo.s3.eu-central-1.amazonaws.com/USB-Signed-Win-Drv.zip"
         $Driver = "DriverWindows.zip"
@@ -120,7 +118,6 @@ while ($continue) {
         Expand-Archive "$LocalTempDir\$Driver" -DestinationPath "$LocalTempDir\"
         pnputil /add-driver "$LocalTempDir\windrv\*inf" /install
     }
-    
 
     switch ($choix) {
         1 {
@@ -203,5 +200,3 @@ while ($continue) {
         default { Write-Host "Choix invalide" -ForegroundColor Red }
     }
 }
-
-
