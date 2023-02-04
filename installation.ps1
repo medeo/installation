@@ -47,7 +47,6 @@ while ($continue) {
             $urlKligo, 
             $destinationFolder = "$LocalTempDir", 
             [switch]$includeStats
-
         )
         Add-Type –AssemblyName Microsoft.VisualBasic
         #resolve potential redirect
