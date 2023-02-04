@@ -165,7 +165,7 @@ while ($continue) {
             stop-process -name explorer -force
 
         }
-        ‘q’ { $continue = $false }
+        "q" { $continue = $false }
         default { Write-Host "Choix invalide" -ForegroundColor Red }
     }
 }
