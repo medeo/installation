@@ -2,7 +2,7 @@
 $OutputEncoding = [ System.Text.Encoding]::UTF8
 $continue = $true
 while ($continue) {
-    clear
+    #clear
     Write-Host "`n"
     Write-Host " ____________________________________________________________________________ " -ForegroundColor Red 
     Write-Host "|                                                                            |" -ForegroundColor Red 
