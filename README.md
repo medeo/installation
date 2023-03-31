@@ -21,6 +21,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 curl https://raw.githubusercontent.com/medeo/installation/main/installation-medeo-mac.sh -o installation-medeo-mac.sh
 chmod +x installation-medeo-mac.sh
 ./installation-medeo-mac.sh
+
 ```
 
 
