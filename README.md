@@ -18,9 +18,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 2. Installation du service FTP
 3. Affichage de l'IP local
 ```
-curl https://raw.githubusercontent.com/medeo/installation/main/ecgmedeo.sh -o ecgmedeo.sh
-chmod +x ecgmedeo.sh
-./ecgmedeo.sh
+curl https://raw.githubusercontent.com/medeo/installation/main/installation-medeo-mac.sh -o installation-medeo-mac.sh
+chmod +x installation-medeo-mac.sh
+./installation-medeo-mac.sh
 ```
 
 
