@@ -51,10 +51,10 @@ esac
 read -r -p "Installation du service ECG? [Y/n] " response2
 case "$response2" in
     [nN][oO]|[nN]) 
-        echo "Pas d'installation du service FTP"
+        echo "Pas d'installation du service ECG"
         ;;
     *)
-        echo "Installation du service FTP"
+        echo "Installation du service ECG"
         curl -0 "$URLDOCKER" -o Docker.dmg
 		sudo hdiutil attach Docker.dmg
 		sleep 1
