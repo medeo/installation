@@ -48,7 +48,7 @@ case "$response1" in
         ;;
 esac
 
-read -r -p "Installation du service FTP? [Y/n] " response2
+read -r -p "Installation du service ECG? [Y/n] " response2
 case "$response2" in
     [nN][oO]|[nN]) 
         echo "Pas d'installation du service FTP"
